@@ -1,0 +1,64 @@
+﻿@using Laboratory9.Entities
+@model IEnumerable<LinkDes>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Мои ссылки</title>
+    <style>
+       table {
+        width: 900px; 
+        text-align-all: center;
+        margin: inherit;
+       }
+      </style>
+</head>
+<body>
+    <h1>Добро пожаловать, @User.Identity.Name! Это список ваших ссылок.</h1>
+    @Html.Raw(ViewBag.error)
+    <a href="/Home/AllLinks">Все ссылки</a>
+    <a href="/Home/Logout">Выйти</a>
+    <h3>Добавить новую ссылку</h3>
+    <form method="post">
+        <b>Ссылка</b>
+        <input type="text" name="link" />
+        <b>Описание</b>
+        <input type="text" name="description" />
+        <input type="submit" name="button" value="Добавить" />
+    </form>
+    <h3>Изменить ссылку по ID</h3>
+    <form method="post">
+        <b>ID ссылки</b>
+        <input type="text" name="linkID" />
+        <b>Новая ссылка</b>
+        <input type="text" name="new_link" />
+        <input type="submit" name="button" value="Изменить ссылку" />
+        <b>Новое описание</b>
+        <input type="text" name="new_description" />
+        <input type="submit" name="button" value="Изменить описание" />
+    </form>
+    <div style="width:300%; height:400px; overflow-y:scroll;">
+        <table>
+            <tr>
+                <td><h4>ID ссылки</h4></td>
+                <td><h4>Ссылка</h4></td>
+                <td><h4>Описание</h4></td>
+                <td><h4>Удаление</h4></td>
+
+            </tr>
+            @foreach (LinkDes msg in Model)
+            {
+                if (msg.Sender.Username == User.Identity.Name)
+                {
+<tr>
+    <td>@msg.Id</td>
+    <td><a href="@msg.Link">@msg.Link</a></td>
+    <td>@msg.Description</td>
+    <td><a href="/Home/DeleteAddress?IdLink=@msg.Id&Sender=@User.Identity.Name">Удалить</a></td>
+
+</tr>}
+            }
+        </table>
+    </div>
+</body>
+</html>

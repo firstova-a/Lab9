@@ -1,0 +1,50 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using Laboratory9.Entities
+@model IEnumerable<LinkDes>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Все ссылки</title>
+    <style>
+        table {
+            width: 900px;
+            text-align-all: center;
+            margin: inherit;
+        }
+    </style>
+</head>
+<body>
+    <h1>Добро пожаловать, @User.Identity.Name! Это список всех ссылок.</h1>
+    @Html.Raw(ViewBag.error)
+    <a href="/Home/UserPage">На свою страницу</a>
+    
+    
+    <div style="width:100%; height:300px; overflow-y:scroll;">
+        <table>
+            <tr>
+                
+                <td><h4>Отправитель</h4></td>
+                <td><h4>Ссылка</h4></td>
+                <td><h4>Описание</h4></td>
+
+            </tr>
+            @foreach (LinkDes msg in Model)
+            {
+
+                <tr>
+                    
+                    <td>@msg.Sender.Username</td>
+                    <td><a href="@msg.Link">@msg.Link</a></td>
+                    <td>@msg.Description</td>
+
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

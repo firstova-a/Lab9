@@ -1,0 +1,27 @@
+﻿@{
+}
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Главная</title>
+</head>
+<body>
+
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <h1>Добро пожаловать</h1>
+        <a href="/Home/Register">Регистрация</a>
+        <a href="/Home/Login">Авторизация</a>
+    }
+    else
+    {
+        <h1>Добро пожаловать @User.Identity.Name!</h1>
+        <a href="/Home/UserPage">Мои сылки</a>
+        <a href="/Home/AllLinks">Все ссылки</a>
+        <a href="/Home/Logout">Выйти</a>
+        
+    }
+</body>
+</html>
